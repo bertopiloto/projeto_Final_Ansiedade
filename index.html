@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    .footer {
+        background-color: #f8f9fa;
+        padding: 10px;
+        text-align: center;
+        box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.1);
+    }
+</style>
+    <title>Questionário</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+<body>
+
+    <h1>Questionário</h1>
+    <form action="/resultado" method="POST">
+        {% for pergunta in perguntas %}
+        <h3>{{ pergunta['pergunta'] }}</h3>
+        {% for sintoma in pergunta['sintomas'] %}
+        <input type="checkbox" name="{{ pergunta['pergunta'] }}" value="{{ sintoma }}"> {{ sintoma }}<br>
+        {% endfor %}
+        {% endfor %}
+        <br>
+        <input type="submit" value="Enviar">
+    </form>
+
+    {% if resultado %}
+    <h2>Resultado:</h2>
+    <p>{{ resultado | safe }}</p>
+    {% endif %}
+    </form>
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">Criado por Humberto Piloto</p>
+    </div>
+</footer>
+
+</body>
+</html>
